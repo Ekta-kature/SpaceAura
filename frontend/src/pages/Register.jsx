@@ -26,7 +26,7 @@ export default function Register() {
     } finally { setLoading(false); }
   };
 
-  const handleGoogle = () => { window.location.href = 'http://localhost:5000/api/auth/google'; };
+  const handleGoogle = () => { window.location.href = (import.meta.env.VITE_API_URL || 'http://localhost:5000') + '/api/auth/google'; };
 
   return (
     <div style={s.page}>
