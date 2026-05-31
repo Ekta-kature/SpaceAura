@@ -15,12 +15,13 @@ const server = http.createServer(app);
 
 // ── ALLOWED ORIGINS ──────────────────────────────────────────
 const ORIGINS = [
-  'http://localhost:5173',  // Vite React dev server
+  'http://localhost:5173',
   'http://127.0.0.1:5173',
-  'http://localhost:5500',  // Live Server (legacy HTML)
+  'http://localhost:5500',
   'http://127.0.0.1:5500',
   'http://localhost:3000',
   'http://127.0.0.1:3000',
+  'https://space-aura-2wxf.vercel.app',  // ← ADD THIS LINE
   process.env.FRONTEND_URL,
 ].filter(Boolean);
 
