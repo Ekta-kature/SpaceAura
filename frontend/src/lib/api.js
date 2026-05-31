@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const BASE = import.meta.env.VITE_API_URL || 'https://spaceaura.onrender.com';
+
 const api = axios.create({
-  baseURL: (import.meta.env.VITE_API_URL || '') + '/api',
+  baseURL: BASE + '/api',
   withCredentials: true,
 });
 
@@ -22,7 +24,8 @@ api.interceptors.response.use(
       const refresh = localStorage.getItem('sa_refresh');
       if (refresh) {
         try {
-          const { data } = await axios.post('/api/auth/refresh', { refreshToken: refresh });
+          // ✅ FIX: use absolute URL to backend, not relative (which hits Vercel)
+          const { data } = await axios.post(BASE + '/api/auth/refresh', { refreshToken: refresh });
           localStorage.setItem('sa_token', data.accessToken);
           localStorage.setItem('sa_refresh', data.refreshToken);
           original.headers.Authorization = `Bearer ${data.accessToken}`;
@@ -45,7 +48,8 @@ export const authApi = {
   login:    (data) => api.post('/auth/login', data),
   logout:   ()     => api.post('/auth/logout'),
   me:       ()     => api.get('/auth/me'),
-  googleUrl: ()    => `${window.location.origin}/api/auth/google`,
+  // ✅ FIX: point to backend URL, not window.location.origin (which is Vercel)
+  googleUrl: ()    => BASE + '/api/auth/google',
 };
 
 // ── PRODUCTS ──────────────────────────────────────────────────
