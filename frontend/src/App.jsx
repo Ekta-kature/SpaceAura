@@ -21,6 +21,8 @@ import VendorDashboard from './pages/VendorDashboard';
 import Chat from './pages/Chat';
 import Dashboard from './pages/Dashboard';
 import './index.css';
+import Privacy from './pages/Privacy';
+
 
 function Layout({ children }) {
   return (
@@ -54,6 +56,7 @@ export default function App() {
             <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/privacy" element={<Privacy />} />
             <Route path="/auth/callback" element={<AuthCallback />} />
           </Routes>
         </CartProvider>
